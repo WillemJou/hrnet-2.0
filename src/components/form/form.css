@@ -1,0 +1,43 @@
+.name-container, .date-container, .first-adress-container, .state-container {
+    display: flex;
+    flex-direction: column;
+   align-items: flex-start;
+}
+.main-adress-container, .main-info-container {
+  margin-top: 30px;
+}
+.main-info-container, .input-adress-container {
+    display: flex;
+    align-items: flex-start;
+  justify-content: space-evenly;
+}
+.department-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2% 0;
+}
+.align-label-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+label {
+    font-size:0.9rem;
+    color: #3C84AB;
+}
+input, select, label {
+  margin: 0 10px 10px 10px;
+}
+select {
+  width: auto;
+  height: 25px;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+button {
+width: 85px;
+height: 30px;
+}
