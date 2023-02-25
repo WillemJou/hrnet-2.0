@@ -11,8 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-h1 {
+.main-title {
   color: #362FD9;
+  margin: 20px 0;
   font-weight: bold;
 }
 .link {

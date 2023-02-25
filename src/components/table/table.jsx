@@ -1,6 +1,6 @@
 import MaterialReactTable from 'material-react-table'
 import { useMemo } from 'react'
-import { EMPLOYEES } from '../../utils/storage'
+import { EMPLOYEES } from '../form/form'
 
 export function Table() {
   const columns = useMemo(
@@ -15,7 +15,7 @@ export function Table() {
       },
       {
         header: 'Date Of Birth',
-        accessorKey: 'dateOfBirth',
+        accessorKey: 'birthDate',
       },
       {
         header: 'Start Date',
@@ -35,22 +35,21 @@ export function Table() {
       },
       {
         header: 'ZIP Code',
-        accessorKey: 'ZIPCode',
+        accessorKey: 'ZipCode',
       },
       {
         header: 'Department',
-        accessorKey: 'department  ',
+        accessorKey: 'department',
       },
     ],
     []
   )
-
   return (
     <MaterialReactTable
       columns={columns}
       data={EMPLOYEES}
       muiTablePaginationProps={{
-        rowsPerPageOptions: [10, 50, 100],
+        rowsPerPageOptions: [3, 5, 10],
       }}
     />
   )

@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-// ==============+>>>>>>>>>>>>>>>> fichier fonctions + hooks pour éviter répétition du code
-
 export function DropdownMenu(props) {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => {
@@ -18,7 +16,7 @@ export function DropdownMenu(props) {
       >
         {props.list.map((data, index) => (
           <option key={index} value={data.abbreviation}>
-            {data.name || data.length}
+            {data.name}
           </option>
         ))}
       </select>

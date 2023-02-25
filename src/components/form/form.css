@@ -3,9 +3,6 @@
     flex-direction: column;
    align-items: flex-start;
 }
-.main-adress-container, .main-info-container {
-  margin-top: 30px;
-}
 .main-info-container, .input-adress-container {
     display: flex;
     align-items: flex-start;

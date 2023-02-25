@@ -5,7 +5,7 @@ export function Nav() {
   return (
     <div className="nav-container">
       <Link className="link" to="/">
-        <h1>HRNet</h1>
+        <h1 className="main-title">HRNet</h1>
       </Link>
       <Link className="link" to="/current-employees">
         View Curent Employees
