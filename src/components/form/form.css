@@ -3,11 +3,15 @@
     flex-direction: column;
    align-items: flex-start;
 }
+.main-info-container{
+  margin: 0 16px;
+}
 .main-info-container, .input-adress-container {
     display: flex;
     align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
+
 .department-container {
   display: flex;
   flex-direction: column;
@@ -21,7 +25,7 @@
 }
 label {
     font-size:0.9rem;
-    color: #3C84AB;
+    color: #362FD9;
 }
 input, select, label {
   margin: 0 10px 10px 10px;
@@ -29,12 +33,35 @@ input, select, label {
 select {
   width: auto;
   height: 25px;
+  text-align: center;
+}
+input, select {
+  border: thin solid #3C84AB;
 }
 .btn-container {
   display: flex;
   justify-content: center;
 }
-button {
+.save-btn {
 width: 85px;
 height: 30px;
+border: thin solid #362FD9;
+border-radius: 5%;
+color: #362FD9;
+font-weight: 700;
+background-color: white;
+}
+
+@media screen and (max-width: 550px) {
+  .input-adress-container, .main-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .name-container, .date-container, .first-adress-container, .state-container{
+        align-items: center;
+   }
+   select{
+    text-align: center;
+   }
 }

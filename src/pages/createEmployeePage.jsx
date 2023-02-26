@@ -6,7 +6,9 @@ export function CreateEmployeePage() {
   return (
     <>
       <Nav />
-      <Form props />
+      <div className="form-container">
+        <Form props />
+      </div>
     </>
   )
 }

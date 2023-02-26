@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
+import './agenda.css'
 import { useInput } from 'react-day-picker'
 
 export function Agenda({ htmlFor, id, idValue, title, value, onChange }) {
@@ -33,12 +34,14 @@ export function Agenda({ htmlFor, id, idValue, title, value, onChange }) {
         {...inputProps}
       />
       {isopen ? (
-        <DayPicker
-          onSelect={handleOnSelect}
-          mode="single"
-          selected={value}
-          {...dayPickerProps}
-        />
+        <div className="agenda-container">
+          <DayPicker
+            onSelect={handleOnSelect}
+            mode="single"
+            selected={value}
+            {...dayPickerProps}
+          />
+        </div>
       ) : null}
     </>
   )

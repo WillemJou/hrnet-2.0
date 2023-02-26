@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { EMPLOYEES } from '../form/form'
 
 export function Table() {
+  console.log(EMPLOYEES)
   const columns = useMemo(
     () => [
       {

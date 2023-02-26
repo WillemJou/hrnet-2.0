@@ -1,6 +1,6 @@
 import './form.css'
 import { useContext } from 'react'
-import { Agenda } from '../agenda'
+import { Agenda } from '../agenda/agenda'
 import { DropdownMenu } from '../dropdownMenu/dropdownMenu'
 import { EmployeeContext } from '../../context/EmployeesContext'
 import { Modal } from 'test2-react-simple-modal'
@@ -8,21 +8,42 @@ import 'test2-react-simple-modal/dist/index.css'
 import { FormContext } from '../../context/FormContext'
 const americaStatesList = require('../../data/state.json')
 const departmentList = require('../../data/department.json')
-const store = JSON.parse(localStorage.getItem('employees'))
-export const EMPLOYEES = store ? store : []
+const initialState = {
+  firstName: '',
+  lastName: '',
+  birthDate: '',
+  startDate: '',
+  street: '',
+  city: '',
+  USState: '',
+  ZipCode: '',
+  department: '',
+}
+export const EMPLOYEES = JSON.parse(localStorage.getItem('employees'))
+  ? JSON.parse(localStorage.getItem('employees'))
+  : [initialState]
 
 export function Form() {
-  const [newEmployee, updateState] = useContext(EmployeeContext)
+  const [newEmployee, setNewEmployee] = useContext(EmployeeContext)
   const [toggle, handleToggle] = useContext(FormContext)
 
-  function handleSubmit(e) {
-    updateState({ target: e.target })
+  const updateState = (e) => {
+    const { id, value } = e.target
+    setNewEmployee((prevState) => ({
+      ...prevState,
+      [id]: value,
+    }))
+  }
+
+  const storage = () => {
     localStorage.setItem('employees', JSON.stringify(EMPLOYEES))
     EMPLOYEES.push(newEmployee)
-
-    console.log(EMPLOYEES)
-    handleToggle(true)
+  }
+  function handleSubmit(e) {
     e.preventDefault()
+    storage()
+    setNewEmployee(initialState)
+    handleToggle(true)
   }
   return (
     <>
@@ -117,12 +138,14 @@ export function Form() {
         </div>
       </form>
       <div className="btn-container">
-        <button onClick={(e) => handleSubmit(e)}>Save</button>
+        <button className="save-btn" onClick={(e) => handleSubmit(e)}>
+          Save
+        </button>
       </div>
       <Modal
         title={'Succès'}
         subTitle={'Un nouvel employé à été crée'}
-        content={'Bienvenue à ' + newEmployee.firstName}
+        content={'Bienvenue à ' + EMPLOYEES.slice(-1).pop().firstName + ' 👍'}
         isOpen={toggle}
         onClose={() => {
           handleToggle(false)

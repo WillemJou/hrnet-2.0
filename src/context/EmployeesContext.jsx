@@ -14,15 +14,8 @@ export const EmployeeProvider = (props) => {
     ZipCode: '',
     department: '',
   })
-  const updateState = (e) => {
-    const { id, value } = e.target
-    setNewEmployee((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }))
-  }
   return (
-    <EmployeeContext.Provider value={[newEmployee, updateState]}>
+    <EmployeeContext.Provider value={[newEmployee, setNewEmployee]}>
       {props.children}
     </EmployeeContext.Provider>
   )
