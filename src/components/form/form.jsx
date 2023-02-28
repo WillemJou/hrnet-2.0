@@ -1,13 +1,13 @@
 import './form.css'
 import { useContext } from 'react'
 import { Agenda } from '../agenda/agenda'
-import { DropdownMenu } from '../dropdownMenu/dropdownMenu'
 import { EmployeeContext } from '../../context/EmployeesContext'
-import { Modal } from 'test2-react-simple-modal'
-import 'test2-react-simple-modal/dist/index.css'
-import { FormContext } from '../../context/FormContext'
+import { Modal } from 'simple-react-modal-wj'
+import { Labeling } from './labeling'
 const americaStatesList = require('../../data/state.json')
 const departmentList = require('../../data/department.json')
+
+//////////// code poubelle
 const initialState = {
   firstName: '',
   lastName: '',
@@ -22,12 +22,15 @@ const initialState = {
 export const EMPLOYEES = JSON.parse(localStorage.getItem('employees'))
   ? JSON.parse(localStorage.getItem('employees'))
   : [initialState]
+////////////////////
 
-export function Form() {
-  const [newEmployee, setNewEmployee] = useContext(EmployeeContext)
-  const [toggle, handleToggle] = useContext(FormContext)
+export function Form(e) {
+  const { employee, permission, errors } = useContext(EmployeeContext)
+  const [newEmployee, setNewEmployee] = employee
+  const [toggle, handleToggle] = permission
+  const [error, setError] = errors
 
-  const updateState = (e) => {
+  const inputChange = (e) => {
     const { id, value } = e.target
     setNewEmployee((prevState) => ({
       ...prevState,
@@ -39,41 +42,47 @@ export function Form() {
     localStorage.setItem('employees', JSON.stringify(EMPLOYEES))
     EMPLOYEES.push(newEmployee)
   }
+
   function handleSubmit(e) {
     e.preventDefault()
-    storage()
-    setNewEmployee(initialState)
-    handleToggle(true)
+    const checkInputsValues = Object.values(newEmployee).every((v) => v === '')
+    if (checkInputsValues) {
+      setError(true)
+    } else {
+      storage()
+      setNewEmployee(initialState)
+      handleToggle(true)
+    }
   }
+
   return (
     <>
       <form onSubmit={handleSubmit} method="post">
         <div className="main-info-container">
           <div className="name-container">
-            <label htmlFor="firstName">First Name</label>
-            <input
-              onChange={(e) => updateState(e)}
-              value={newEmployee.firstName}
-              type="text"
+            <Labeling
+              label="First Name"
               id="firstName"
-            />
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              value={newEmployee.lastName}
-              onChange={(e) => updateState(e)}
+              onChange={inputChange}
               type="text"
+              value={newEmployee.firstName}
+            />
+            <Labeling
+              label="Last Name"
               id="lastName"
+              onChange={inputChange}
+              type="text"
+              value={newEmployee.lastName}
             />
           </div>
           <div className="date-container">
-            <Agenda
-              htmlFor="birthDate"
+            <Labeling
+              label="Date of Birth"
               id="birthDate"
-              idValue="birthDate"
-              title="Date of Birth"
               type="date"
+              onChange={inputChange}
               value={newEmployee.birthDate}
-              onChange={updateState}
+              error={error}
             />
             <Agenda
               htmlFor="startDate"
@@ -82,7 +91,7 @@ export function Form() {
               title="Start Date"
               type="date"
               value={newEmployee.startDate}
-              onChange={updateState}
+              onChange={inputChange}
             />
           </div>
         </div>
@@ -90,49 +99,52 @@ export function Form() {
           <legend>Adress</legend>
           <div className="input-adress-container">
             <div className="first-adress-container">
-              <label htmlFor="street">Street</label>
-              <input
+              <Labeling
+                label="Street"
                 id="street"
+                onChange={inputChange}
                 type="text"
                 value={newEmployee.street}
-                onChange={(e) => updateState(e)}
               />
-              <label htmlFor="city">City</label>
-              <input
+
+              <Labeling
+                label="City"
                 id="city"
+                onChange={inputChange}
                 type="text"
                 value={newEmployee.city}
-                onChange={(e) => updateState(e)}
               />
             </div>
             <div className="state-container">
-              <label htmlFor="USState">State</label>
-              <DropdownMenu
-                name="state"
+              <Labeling
+                label="State"
                 id="USState"
+                type="select"
                 list={americaStatesList}
-                onChange={updateState}
+                onChange={inputChange}
                 value={newEmployee.USState}
+                error={error}
               />
-              <label htmlFor="ZipCode">ZIP Code</label>
-              <input
-                type="number"
+              <Labeling
+                label="Zip Code"
                 id="ZipCode"
+                onChange={inputChange}
+                type="number"
                 value={newEmployee.ZipCode}
-                onChange={(e) => updateState(e)}
               />
             </div>
           </div>
         </fieldset>
         <div className="department-container">
           <div className="align-label-container">
-            <label htmlFor="department">Department</label>
-            <DropdownMenu
-              name="department"
+            <Labeling
+              label="Department"
               id="department"
+              type="select"
               list={departmentList}
+              onChange={inputChange}
               value={newEmployee.department}
-              onChange={updateState}
+              error={error}
             />
           </div>
         </div>
@@ -142,6 +154,7 @@ export function Form() {
           Save
         </button>
       </div>
+
       <Modal
         title={'Succès'}
         subTitle={'Un nouvel employé à été crée'}

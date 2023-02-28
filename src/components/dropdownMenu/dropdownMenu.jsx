@@ -8,7 +8,7 @@ export function DropdownMenu(props) {
   return (
     <>
       <select
-        name={props.name}
+        name={props.label}
         id={props.id}
         value={props.value}
         onChange={props.onChange}

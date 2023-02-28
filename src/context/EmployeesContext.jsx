@@ -14,8 +14,19 @@ export const EmployeeProvider = (props) => {
     ZipCode: '',
     department: '',
   })
+  const [toggle, setToggle] = useState(false)
+  const handleToggle = () => {
+    setToggle(!toggle)
+  }
+  const [error, setError] = useState(false)
   return (
-    <EmployeeContext.Provider value={[newEmployee, setNewEmployee]}>
+    <EmployeeContext.Provider
+      value={{
+        employee: [newEmployee, setNewEmployee],
+        permission: [toggle, handleToggle],
+        errors: [error, setError],
+      }}
+    >
       {props.children}
     </EmployeeContext.Provider>
   )
