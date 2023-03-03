@@ -4,19 +4,24 @@ import 'react-day-picker/dist/style.css'
 import './agenda.css'
 import { useInput } from 'react-day-picker'
 
-export function Agenda({ htmlFor, id, idValue, title, value, onChange }) {
+export function Agenda({ id, value, onChange }) {
   const [isopen, setIsOpen] = useState(false)
   const handleOnSelect = (e) => {
     onChange({
       target: {
-        id: idValue,
+        id: id,
         value: e.toLocaleDateString(),
       },
     })
-    return handleOpen()
+    return handleToggle()
   }
-  const handleOpen = () => {
+  const handleToggle = () => {
     setIsOpen(!isopen)
+  }
+  const openWithKey = (e) => {
+    if (e.key === 'Enter') {
+      return handleToggle()
+    }
   }
   const { inputProps, dayPickerProps } = useInput({
     format: 'PP',
@@ -25,10 +30,10 @@ export function Agenda({ htmlFor, id, idValue, title, value, onChange }) {
   })
   return (
     <>
-      <label htmlFor={htmlFor}>{title}</label>
       <input
         value={value}
-        onClick={handleOpen}
+        onClick={handleToggle}
+        onKeyDown={openWithKey}
         type="text"
         id={id}
         {...inputProps}

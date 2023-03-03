@@ -16,7 +16,7 @@ code {
   margin: 20px 0;
   font-weight: bold;
 }
-.link {
+a {
     text-decoration: none;
     color: #362FD9;
 }
@@ -24,7 +24,5 @@ code {
   display: flex;
   justify-content: space-between;
 }
-.form-container{
-  margin: 5% 10%;
-}
+
 

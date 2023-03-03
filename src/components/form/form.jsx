@@ -1,55 +1,23 @@
 import './form.css'
-import { useContext } from 'react'
-import { Agenda } from '../agenda/agenda'
-import { EmployeeContext } from '../../context/EmployeesContext'
+import { useStateEmployee, useStateError, useStateToggle } from '../../hooks'
+import { EMPLOYEES, initialState, storage, inputChange } from '../../utils'
 import { Modal } from 'simple-react-modal-wj'
 import { Labeling } from './labeling'
 const americaStatesList = require('../../data/state.json')
 const departmentList = require('../../data/department.json')
 
-//////////// code poubelle
-const initialState = {
-  firstName: '',
-  lastName: '',
-  birthDate: '',
-  startDate: '',
-  street: '',
-  city: '',
-  USState: '',
-  ZipCode: '',
-  department: '',
-}
-export const EMPLOYEES = JSON.parse(localStorage.getItem('employees'))
-  ? JSON.parse(localStorage.getItem('employees'))
-  : [initialState]
-////////////////////
-
-export function Form(e) {
-  const { employee, permission, errors } = useContext(EmployeeContext)
-  const [newEmployee, setNewEmployee] = employee
-  const [toggle, handleToggle] = permission
-  const [error, setError] = errors
-
-  const inputChange = (e) => {
-    const { id, value } = e.target
-    setNewEmployee((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }))
-  }
-
-  const storage = () => {
-    localStorage.setItem('employees', JSON.stringify(EMPLOYEES))
-    EMPLOYEES.push(newEmployee)
-  }
+export function Form() {
+  const [newEmployee, setNewEmployee] = useStateEmployee()
+  const { toggle, handleToggle } = useStateToggle()
+  const { error, setError } = useStateError()
 
   function handleSubmit(e) {
     e.preventDefault()
-    const checkInputsValues = Object.values(newEmployee).every((v) => v === '')
+    const checkInputsValues = Object.values(newEmployee).includes('')
     if (checkInputsValues) {
       setError(true)
     } else {
-      storage()
+      storage(newEmployee)
       setNewEmployee(initialState)
       handleToggle(true)
     }
@@ -63,16 +31,18 @@ export function Form(e) {
             <Labeling
               label="First Name"
               id="firstName"
-              onChange={inputChange}
+              onChange={(e) => inputChange(e, setNewEmployee)}
               type="text"
               value={newEmployee.firstName}
+              error={error}
             />
             <Labeling
               label="Last Name"
               id="lastName"
-              onChange={inputChange}
+              onChange={(e) => inputChange(e, setNewEmployee)}
               type="text"
               value={newEmployee.lastName}
+              error={error}
             />
           </div>
           <div className="date-container">
@@ -80,18 +50,17 @@ export function Form(e) {
               label="Date of Birth"
               id="birthDate"
               type="date"
-              onChange={inputChange}
+              onChange={(e) => inputChange(e, setNewEmployee)}
               value={newEmployee.birthDate}
               error={error}
             />
-            <Agenda
-              htmlFor="startDate"
+            <Labeling
+              label="Start Date"
               id="startDate"
-              idValue="startDate"
-              title="Start Date"
               type="date"
+              onChange={(e) => inputChange(e, setNewEmployee)}
               value={newEmployee.startDate}
-              onChange={inputChange}
+              error={error}
             />
           </div>
         </div>
@@ -102,17 +71,18 @@ export function Form(e) {
               <Labeling
                 label="Street"
                 id="street"
-                onChange={inputChange}
+                onChange={(e) => inputChange(e, setNewEmployee)}
                 type="text"
                 value={newEmployee.street}
+                error={error}
               />
-
               <Labeling
                 label="City"
                 id="city"
-                onChange={inputChange}
+                onChange={(e) => inputChange(e, setNewEmployee)}
                 type="text"
                 value={newEmployee.city}
+                error={error}
               />
             </div>
             <div className="state-container">
@@ -121,16 +91,16 @@ export function Form(e) {
                 id="USState"
                 type="select"
                 list={americaStatesList}
-                onChange={inputChange}
+                onChange={(e) => inputChange(e, setNewEmployee)}
                 value={newEmployee.USState}
-                error={error}
               />
               <Labeling
                 label="Zip Code"
                 id="ZipCode"
-                onChange={inputChange}
+                onChange={(e) => inputChange(e, setNewEmployee)}
                 type="number"
                 value={newEmployee.ZipCode}
+                error={error}
               />
             </div>
           </div>
@@ -142,9 +112,8 @@ export function Form(e) {
               id="department"
               type="select"
               list={departmentList}
-              onChange={inputChange}
+              onChange={(e) => inputChange(e, setNewEmployee)}
               value={newEmployee.department}
-              error={error}
             />
           </div>
         </div>
@@ -158,7 +127,11 @@ export function Form(e) {
       <Modal
         title={'Succès'}
         subTitle={'Un nouvel employé à été crée'}
-        content={'Bienvenue à ' + EMPLOYEES.slice(-1).pop().firstName + ' 👍'}
+        content={
+          EMPLOYEES != null
+            ? 'Bienvenue à ' + EMPLOYEES.slice(-1).pop().firstName + ' 👍'
+            : null
+        }
         isOpen={toggle}
         onClose={() => {
           handleToggle(false)

@@ -10,7 +10,6 @@ export function DropdownMenu(props) {
       <select
         name={props.label}
         id={props.id}
-        value={props.value}
         onChange={props.onChange}
         onClick={handleOpen}
       >

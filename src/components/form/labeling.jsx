@@ -2,7 +2,9 @@ import { Agenda } from '../agenda/agenda'
 import { DropdownMenu } from '../dropdownMenu/dropdownMenu'
 import './form.css'
 
+// Labelling component generating different inputs
 export function Labeling({ label, onChange, id, type, value, list, error }) {
+  // switch function to choose form inputs depending on type inputs
   const switchTypeInput = () => {
     switch (type) {
       case 'select':
@@ -10,24 +12,31 @@ export function Labeling({ label, onChange, id, type, value, list, error }) {
       case 'date':
         return Agenda({ id, label, value, onChange })
       case 'text':
-        return FieldInput({ id, value, onChange })
-
+        return FieldInput({ type, id, value, onChange })
+      case 'number':
+        return FieldInput({ type, id, value, onChange })
       default:
         break
     }
   }
-
   return (
     <>
       <label htmlFor={id}>{label}</label>
-      {error && value === '' ? (
-        <span className="errorMsg"> is required</span>
-      ) : null}
       {switchTypeInput()}
+      {error && value === '' ? (
+        <span className="errorMsg"> this field is require</span>
+      ) : null}
     </>
   )
 }
-
+// simple component for text or number inputs
 const FieldInput = (props) => {
-  return <input id={props.id} value={props.value} onChange={props.onChange} />
+  return (
+    <input
+      id={props.id}
+      type={props.type}
+      value={props.value}
+      onChange={props.onChange}
+    />
+  )
 }
