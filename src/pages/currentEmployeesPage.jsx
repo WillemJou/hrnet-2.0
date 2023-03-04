@@ -2,6 +2,7 @@ import '../index.css'
 import './currentEmployees.css'
 import { Link } from 'react-router-dom'
 import { TableComponent } from '../components/table/table'
+import { Footer } from '../footer/footer'
 
 export function CurrentEmployeesPage() {
   return (
@@ -15,6 +16,7 @@ export function CurrentEmployeesPage() {
       <Link className="link" to="/">
         Home
       </Link>
+      <Footer />
     </>
   )
 }

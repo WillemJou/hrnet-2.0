@@ -118,11 +118,9 @@ export function Form() {
           </div>
         </div>
       </form>
-      <div className="btn-container">
-        <button className="save-btn" onClick={(e) => handleSubmit(e)}>
-          Save
-        </button>
-      </div>
+      <button className="save-btn" onClick={(e) => handleSubmit(e)}>
+        Save
+      </button>
 
       <Modal
         title={'Succès'}

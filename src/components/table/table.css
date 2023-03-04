@@ -1,77 +1,107 @@
-table{
-    background-color: white;
+table {
+  background-color: white;
 }
-.rtl-table-search-form{
-    margin: 10px;
-    margin-left: 0;
+.rtl-table-search-form {
+  margin: 10px;
+  margin-left: 0;
 }
-.rtl-table-search-form button, table, thead, td{
-    border: thin solid #362FD9;
+.rtl-table-search-form button,
+table,
+thead,
+td {
+  border: thin solid #362fd9;
 }
-.rtl-pagination-active{
-    background-color: #362FD9;
+.rtl-pagination-active {
+  background-color: #362fd9;
 }
- .rtl-table-sortable-header span{
-    color: #3C84AB;
+.rtl-table-sortable-header span {
+  color: #3c84ab;
 }
-.react-table-lite-container table thead{
-    background-color: #362FD9;
-    color: white;
+.react-table-lite-container table thead {
+  background-color: #362fd9;
+  color: white;
 }
-.react-table-lite-container table td{
-    border: 0.0025rem solid #3C84AB;
+.react-table-lite-container table td {
+  border: 0.0025rem solid #3c84ab;
 }
-@media 
-only screen and (max-width: 850px),
-(min-device-width: 850px) and (max-device-width: 1024px)  {
+@media only screen and (max-width: 850px),
+  (min-device-width: 850px) and (max-device-width: 1024px) {
+  .react-table-lite-container .rtl-table-search-form {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 1;
+  }
+  .react-table-lite-container input {
+    width: 75%;
+  }
+  .react-table-lite-container table,
+  .react-table-lite-container thead,
+  .react-table-lite-container tbody,
+  .react-table-lite-container th,
+  .react-table-lite-container td,
+  .react-table-lite-container tr {
+    display: block;
+  }
+  .react-table-lite-container thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .react-table-lite-container tr {
+    border: 1px solid #362fd9;
+  }
+  .react-table-lite-container td {
+    display: flex;
+    gap: 40%;
+    border: none;
+    border-bottom: 1px solid #362fd9;
+    position: relative;
+    padding-left: 50%;
+  }
 
-    .react-table-lite-container .rtl-table-search-form{
-        z-index: 1;
-        position: fixed;
-        top: 0;
-        left: 0;
-        opacity: 1;
-    }
-	.react-table-lite-container table,.react-table-lite-container thead,.react-table-lite-container tbody,.react-table-lite-container th,.react-table-lite-container td,.react-table-lite-container tr { 
-		display: block; 
-	}
-	.react-table-lite-container thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	.react-table-lite-container tr { border: 1px solid #362FD9; }
-	.react-table-lite-container td { 
-        display: flex;
-        gap: 40%;
-		border: none;
-		border-bottom: 1px solid #362FD9; 
-		position: relative;
-		padding-left: 50%; 
-	}
+  .react-table-lite-container table td {
+    border: 0.0025rem solid #362fd9;
+  }
 
-    .react-table-lite-container table td{
-        border: 0.0025rem solid #362FD9;
-    }
-
-    .react-table-lite-container td:before{
-       padding-right: 20px;
-    }
-    .react-table-lite-container td:after{
-        position: absolute;
-		top: 6px;
-		left: 5px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-    }
-    .react-table-lite-container td:nth-of-type(1):before { content: "firstName"; }
-	.react-table-lite-container td:nth-of-type(2):before { content: "lastName"; }
-	.react-table-lite-container td:nth-of-type(3):before { content: "birthDate"; }
-	.react-table-lite-container td:nth-of-type(4):before { content: " startDate"; }
-	.react-table-lite-container td:nth-of-type(5):before { content: " street"; }
-	.react-table-lite-container td:nth-of-type(6):before { content: "city"; }
-	.react-table-lite-container td:nth-of-type(7):before { content: "USState"; }
-	.react-table-lite-container td:nth-of-type(8):before { content: "ZipCode"; }
-	.react-table-lite-container td:nth-of-type(10):before { content: "department"; }
+  .react-table-lite-container td:before {
+    font-weight: bold;
+    width: 30px;
+  }
+  .react-table-lite-container td:after {
+    position: absolute;
+    top: 6px;
+    left: 5px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+  .react-table-lite-container td:nth-of-type(1):before {
+    content: 'firstName';
+  }
+  .react-table-lite-container td:nth-of-type(2):before {
+    content: 'lastName';
+  }
+  .react-table-lite-container td:nth-of-type(3):before {
+    content: 'birthDate';
+  }
+  .react-table-lite-container td:nth-of-type(4):before {
+    content: ' startDate';
+  }
+  .react-table-lite-container td:nth-of-type(5):before {
+    content: ' street';
+  }
+  .react-table-lite-container td:nth-of-type(6):before {
+    content: 'city';
+  }
+  .react-table-lite-container td:nth-of-type(7):before {
+    content: 'USState';
+  }
+  .react-table-lite-container td:nth-of-type(8):before {
+    content: 'ZipCode';
+  }
+  .react-table-lite-container td:nth-of-type(9):before {
+    content: 'department';
+  }
 }

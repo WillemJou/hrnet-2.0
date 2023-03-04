@@ -1,10 +1,12 @@
 .name-container, .date-container, .first-adress-container, .state-container {
+  width: 100%;
     display: flex;
     flex-direction: column;
    align-items: flex-start;
 }
 .input-adress-container, .main-info-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
     align-items: flex-start;
 }
@@ -12,10 +14,11 @@
 .department-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin: 2% 0;
 }
 .align-label-container{
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -27,56 +30,52 @@
 }
 label {
     color: #362FD9;
-    margin: 20px 20px 20px 0;
+    margin: 20px 20px 10px 0;
 }
 fieldset{
-  margin: 30px 0;
+  margin: 50px 0;
   margin-bottom: 10px;
   padding-bottom: 40px;
 }
 input, select, .labeling {
-  margin: 0 10px 0 0;
+  width: 50%;
+  height: 23px;
 }
 select {
-  width: auto;
+  height: 28px;
   padding: 1px 2px;
   text-align: center;
 }
 input, select {
   border: thin solid #3C84AB;
 }
-.btn-container {
-  display: flex;
-  justify-content: center;
-}
+
 button {
   border: thin solid #362FD9;
-  border-radius: 5%;
   color: #362FD9;
   background-color: white;
 }
 .save-btn {
-width: 85px;
-height: 30px;
+width: 29%;
+height: 50px;
 font-weight: 700;
-margin: 20px;
+margin: 29px 0;
+border: thin solid #362FD9;
 }
 .errorMsg{
+  margin: 0 10px 21px 0;
   margin-left: 10px;
   font-size: 0.8rem   ;
   color: red;
 }
 
-@media screen and (max-width: 550px) {
-  .input-adress-container, .main-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+@media screen and (max-width: 550px){
+ form input, select, .btn-container button{
+    width: 100%;
   }
-  .name-container, .date-container, .first-adress-container, .state-container{
-        align-items: center;
-   }
-   select{
-    text-align: center;
-   }
+  .save-btn{
+    justify-content: center;
+    width: 100%;
+  }
 }
+

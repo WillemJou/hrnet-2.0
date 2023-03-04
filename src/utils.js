@@ -1,3 +1,5 @@
+import data from './data/employees.json'
+console.log(data)
 export const initialState = {
   firstName: '',
   lastName: '',
@@ -22,6 +24,7 @@ export const storage = (newEmployee) => {
   localStorage.setItem('employees', JSON.stringify(EMPLOYEES))
   EMPLOYEES.push(newEmployee)
 }
+const mockedData = data
 export const EMPLOYEES = JSON.parse(localStorage.getItem('employees'))
-  ? JSON.parse(localStorage.getItem('employees'))
-  : null
+  ? mockedData && JSON.parse(localStorage.getItem('employees'))
+  : mockedData

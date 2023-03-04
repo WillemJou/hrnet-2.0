@@ -3,6 +3,7 @@ import './table.css'
 import { EMPLOYEES } from '../../utils'
 
 export function TableComponent() {
+  console.log(EMPLOYEES)
   if (EMPLOYEES === null) {
     return 'No employee yet'
   }
@@ -42,9 +43,6 @@ export function TableComponent() {
         'ZipCode',
         'department',
       ]}
-      showPagination={true}
-      currentPageNumber={1}
-      range={5}
       data={EMPLOYEES}
     />
   )
