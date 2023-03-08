@@ -1,17 +1,14 @@
-import { useState } from 'react'
+import { useStateToggle } from '../../hooks'
 
 export function DropdownMenu(props) {
-  const [isOpen, setIsOpen] = useState(false)
-  const handleOpen = () => {
-    setIsOpen(!isOpen)
-  }
+  const { handleToggle } = useStateToggle()
   return (
     <>
       <select
         name={props.label}
         id={props.id}
         onChange={props.onChange}
-        onClick={handleOpen}
+        onClick={handleToggle}
       >
         {props.list.map((data, index) => (
           <option key={index} value={data.abbreviation}>

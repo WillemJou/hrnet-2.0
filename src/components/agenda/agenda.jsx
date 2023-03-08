@@ -1,12 +1,19 @@
-import { useState } from 'react'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import './agenda.css'
 import { useInput } from 'react-day-picker'
+import { useStateToggle } from '../../hooks'
 
 export function Agenda({ id, value, onChange }) {
-  const [isopen, setIsOpen] = useState(false)
+  const { toggle, handleToggle } = useStateToggle()
+
+  /**
+   * `handleOnSelect` is a function that takes an event as an argument, and if the event is not null, it
+   * calls the `onChange` function, passing in an object with the `id` and `value` properties
+   * @returns The date selected by the user.
+   */
   const handleOnSelect = (e) => {
+    if (!e) return
     onChange({
       target: {
         id: id,
@@ -15,17 +22,17 @@ export function Agenda({ id, value, onChange }) {
     })
     return handleToggle()
   }
-  const handleToggle = () => {
-    setIsOpen(!isopen)
-  }
+
   const openWithKey = (e) => {
     if (e.key === 'Enter') {
       return handleToggle()
     }
   }
+
+  // custom hook by daypicker library for inputs
   const { inputProps, dayPickerProps } = useInput({
     format: 'PP',
-    placeholder: null,
+    placeholder: '',
     required: true,
   })
   return (
@@ -38,7 +45,7 @@ export function Agenda({ id, value, onChange }) {
         id={id}
         {...inputProps}
       />
-      {isopen ? (
+      {toggle ? (
         <div className="agenda-container">
           <DayPicker
             onSelect={handleOnSelect}

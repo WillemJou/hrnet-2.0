@@ -4,7 +4,7 @@ import './form.css'
 
 // Labelling component generating different inputs
 export function Labeling({ label, onChange, id, type, value, list, error }) {
-  // switch function to choose form inputs depending on type inputs
+  // switch function to choose form inputs component depending on type inputs
   const switchTypeInput = () => {
     switch (type) {
       case 'select':
@@ -22,6 +22,7 @@ export function Labeling({ label, onChange, id, type, value, list, error }) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
+      {/* set the switch function*/}
       {switchTypeInput()}
       {error && value === '' ? (
         <span className="errorMsg"> this field is require</span>

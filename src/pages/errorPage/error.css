@@ -1,0 +1,13 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-title {
+  color: #362fd9;
+}
+.error-text {
+  color: #3c84ab;
+}

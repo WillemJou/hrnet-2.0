@@ -1,11 +1,11 @@
 table {
   background-color: white;
 }
-.rtl-table-search-form {
+.search-form {
   margin: 10px;
   margin-left: 0;
 }
-.rtl-table-search-form button,
+
 table,
 thead,
 td {
@@ -26,7 +26,7 @@ td {
 }
 @media only screen and (max-width: 850px),
   (min-device-width: 850px) and (max-device-width: 1024px) {
-  .react-table-lite-container .rtl-table-search-form {
+  .search-form {
     z-index: 1;
     position: fixed;
     top: 0;

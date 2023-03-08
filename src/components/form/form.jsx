@@ -7,30 +7,40 @@ const americaStatesList = require('../../data/state.json')
 const departmentList = require('../../data/department.json')
 
 export function Form() {
+  // Custom hook to update new Employee object
   const [newEmployee, setNewEmployee] = useStateEmployee()
+  // Open/Close custom hook
   const { toggle, handleToggle } = useStateToggle()
+  // Error custom hook
   const { error, setError } = useStateError()
+  // boolean to check if some inputs are empty
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    const checkInputsValues = Object.values(newEmployee).includes('')
-    if (checkInputsValues) {
+  const checkInputsValues = Object.values(newEmployee).every((item) => item)
+
+  /**
+   * If the input values are not valid, set the error state to true. If the input values are valid, add
+   * the new employee to local storage, set the new employee state to the initial state, and deploy the
+   * modal with the handleToggle function
+   */
+  function handleSubmit() {
+    if (!checkInputsValues) {
       setError(true)
     } else {
       storage(newEmployee)
       setNewEmployee(initialState)
       handleToggle(true)
+      setError(false)
     }
   }
-
   return (
     <>
-      <form onSubmit={handleSubmit} method="post">
+      <form method="post">
         <div className="main-info-container">
           <div className="name-container">
             <Labeling
               label="First Name"
               id="firstName"
+              //props to update input state value
               onChange={(e) => inputChange(e, setNewEmployee)}
               type="text"
               value={newEmployee.firstName}
@@ -121,16 +131,18 @@ export function Form() {
       <button className="save-btn" onClick={(e) => handleSubmit(e)}>
         Save
       </button>
-
       <Modal
         title={'Succès'}
         subTitle={'Un nouvel employé à été crée'}
+        // props to say hello to the last added employee's first name
         content={
           EMPLOYEES != null
             ? 'Bienvenue à ' + EMPLOYEES.slice(-1).pop().firstName + ' 👍'
             : null
         }
+        // props to open modal on click
         isOpen={toggle}
+        // props to close modal
         onClose={() => {
           handleToggle(false)
           return true
